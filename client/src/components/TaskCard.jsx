@@ -1,9 +1,14 @@
 import React from "react";
 import { useTasks } from "../context/TaskProvider";
+import { useNavigate } from "react-router-dom";
 
 function TaskCard({ task }) {
+  const { deleteTask, toggleTaskDone } = useTasks();
+  const navigate = useNavigate();
 
-  const {deleteTask} = useTasks()
+  const handleDone = async () => {
+    await toggleTaskDone(task.id);
+  };
 
   return (
     <div>
@@ -12,7 +17,8 @@ function TaskCard({ task }) {
       <span>{task.done == 1 ? "✅" : "❌"}</span>
       <span>{task.createAt}</span>
       <button onClick={() => deleteTask(task.id)}>Delete</button>
-      <button>Edit</button>
+      <button onClick={() => navigate(`/edit/${task.id}`)}>Edit</button>
+      <button onClick={() => handleDone(task.done)}>Toggle Task</button>
     </div>
   );
 }
