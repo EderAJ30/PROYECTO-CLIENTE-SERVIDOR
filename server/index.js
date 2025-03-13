@@ -1,8 +1,9 @@
 import express from "express";
 import { PORT } from "./config.js";
 import cors from "cors";
-import indexRoutes from "./routes/index.routes.js";
-import taskRoutes from "./routes/task.routes.js"
+import router_index from './routes/index.routes.js'
+import router_tareas from './routes/tareas.routes.js'
+
 
 const app = express();
 
@@ -11,8 +12,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-app.use(indexRoutes);
-app.use(taskRoutes);
+app.use(router_index);
+app.use(router_tareas);
 
 app.listen(PORT);
 console.log(`se sube a puerto ${PORT}`);

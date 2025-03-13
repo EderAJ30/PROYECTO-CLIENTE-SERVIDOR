@@ -1,45 +1,45 @@
 import { Form, Formik } from "formik";
-import { useTasks } from "../context/TaskProvider";
+import { useTareas } from "../context/TareaProvider";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function TaskForm() {
-  const { createTask, getTask, updateTask } = useTasks();
-  const [task, setTask] = useState({
-    title: "",
-    description: "",
+function TareaForm() {
+  const { createTarea, getTarea, updateTarea } = useTareas();
+  const [tarea, setTarea] = useState({
+    titulo: "",
+    descripcion: "",
   });
   const params = useParams();
-  const navigate = useNavigate();
+  const navigator = useNavigate();
 
   useEffect(() => {
-    const loadTask = async () => {
+    const cargaTarea = async () => {
       if (params.id) {
-        const task = await getTask(params.id);
-        console.log(task);
-        setTask({
-          title: task.title,
-          description: task.description,
+        const tarea = await getTarea(params.id);
+        console.log(tarea);
+        setTarea({
+          titulo: tarea.titulo,
+          descripcion: tarea.descripcion,
         });
       }
     };
-    loadTask();
+    cargaTarea();
   }, []);
 
   return (
     <div>
       <Formik
-        initialValues={task}
+        initialValues={tarea}
         enableReinitialize={true}
-        onSubmit={async (values, actions) => {
-          console.log(values);
+        onSubmit={async (valores, acciones) => {
+          console.log(valores);
           if (params.id) {
-            await updateTask(params.id, values);
+            await updateTarea(params.id, valores);
           } else {
-            await createTask(values);
+            await createTarea(valores);
           }
-          navigate("/");
-          setTask({
+          navigator("/");
+          setTarea({
             title: "",
             description: "",
           });
@@ -50,18 +50,18 @@ function TaskForm() {
             <label>Titulo</label>
             <input
               type="text"
-              name="title"
-              placeholder="Write a description"
+              name="titulo"
+              placeholder="Escribe una descripción"
               onChange={handleChange}
-              value={values.title}
+              value={values.titulo}
             />
             <label>Descripcion</label>
             <textarea
-              name="description"
+              name="descripcion"
               row="3"
-              placeholder="Write a description"
+              placeholder="Escribe una descripción"
               onChange={handleChange}
-              value={values.description}
+              value={values.descripcion}
             ></textarea>
             <button type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Saving ..." : "Save"}
@@ -73,4 +73,4 @@ function TaskForm() {
   );
 }
 
-export default TaskForm;
+export default TareaForm;

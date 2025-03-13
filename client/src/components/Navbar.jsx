@@ -6,14 +6,14 @@ function Navbar() {
       <h1>React MySQL</h1>
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link to="/">Inicio</Link>
         </li>
         <li>
-          <Link to="/new">Create Task</Link>
+          <Link to="/new">Crear tarea</Link>
         </li>
       </ul>
     </div>
   );
-} 
+}
 
 export default Navbar;

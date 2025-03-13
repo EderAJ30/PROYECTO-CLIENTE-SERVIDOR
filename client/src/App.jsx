@@ -1,21 +1,21 @@
 import { Route, Routes } from "react-router-dom";
-import TasksPage from "./pages/TasksPage";
-import TaskForm from "./pages/TaskForm";
-import NotFound from "./pages/NotFound";
+import TareasPage from "./pages/TareasPage";
+import TareaForm from "./pages/TareaForm";
+import NotFound from "./pages/NoEncontrado";
 import Navbar from "./components/Navbar";
-import { TaskContextProvider } from "./context/TaskProvider";
+import { TareaContextProvider } from "./context/TareaProvider";
 
 function App() {
   return (
-      <TaskContextProvider>
+      <TareaContextProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<TasksPage />} />
-          <Route path="/new" element={<TaskForm />} />
-          <Route path="/edit/:id" element={<TaskForm />} />
+          <Route path="/" element={<TareasPage />} />
+          <Route path="/new" element={<TareaForm />} />
+          <Route path="/edit/:id" element={<TareaForm />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </TaskContextProvider>
+      </TareaContextProvider>
   );
 }
 
